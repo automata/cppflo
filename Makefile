@@ -1,20 +1,16 @@
-CXX_STD=c++11 # c++0x ?
+CXX_STD=c++11
 CPP=g++
 
 BUILD_DIR=$(shell echo `pwd`/build)
 THIRDPARTY=$(shell echo `pwd`/thirdparty)
-AMQPCPP=$(THIRDPARTY)/amqpcpp
 
-CXXFLAGS=-I$(THIRDPARTY)/json11/ -I$(AMQPCPP)/install/include/ -I$(AMQPCPP)/examples/rabbitmq_tutorials
-LDFLAGS=$(AMQPCPP)/install/lib/libamqpcpp.a.2.2.0 $(EXTRA_LDFLAGS) -lboost_system -pthread
+CXXFLAGS=-I$(THIRDPARTY)/json11/ -I$(THIRDPARTY)/websocketpp/
+LDFLAGS=-lboost_system -pthread
 
-all: repeat
+all: cppflo
 
 dirs:
 	mkdir -p $(BUILD_DIR)
 
-amqpcpp:
-	cd thirdparty/amqpcpp && make -j4 CPP=$(CPP) LD=$(CPP) PREFIX=./install && make install PREFIX=./install
-
-repeat: dirs amqpcpp
-	$(CPP) -std=$(CXX_STD) -o $(BUILD_DIR)/repeat-cpp ./examples/repeat.cpp $(CXXFLAGS) -I./src $(LDFLAGS)
+cppflo: dirs
+	$(CPP) -std=$(CXX_STD) -o $(BUILD_DIR)/cppflo ./src/cppflo.cpp $(CXXFLAGS) $(LDFLAGS)

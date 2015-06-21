@@ -20,6 +20,7 @@
   "devDependencies": {
     "chai": "~1.9.0",
     "coffee-script": "^1.8.0",
+    "fbp-protocol": "^0.1.6",
     "mocha": "~1.21.0"
   },
   "keywords": [],
