@@ -16,7 +16,9 @@
       "url": "undefined/blob/master/LICENSE-MIT"
     }
   ],
-  "dependencies": {},
+  "dependencies": {
+    "websocket": "^1.0.19"
+  },
   "devDependencies": {
     "chai": "~1.9.0",
     "coffee-script": "^1.8.0",
