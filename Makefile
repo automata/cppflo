@@ -13,4 +13,4 @@ dirs:
 	mkdir -p $(BUILD_DIR)
 
 cppflo: dirs
-	$(CPP) -std=$(CXX_STD) -o $(BUILD_DIR)/cppflo ./src/*.cpp $(CXXFLAGS) $(LDFLAGS)
+	$(CPP) -std=$(CXX_STD) -o $(BUILD_DIR)/cppflo ./src/*.cpp ./src/*.h $(CXXFLAGS) $(LDFLAGS)

@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <thread>
 #include <chrono>
-#include "json11.cpp"
 #include "WebSocketTransport.h"
 
 int main() {

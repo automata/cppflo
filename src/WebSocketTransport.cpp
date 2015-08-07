@@ -9,19 +9,30 @@ WebSocketTransport::WebSocketTransport (int port) {
   httpServer.run();
 }
 
-void WebSocketTransport::send (std::string protocol, std::string topic, Message payload, Message context) {
-  std::cout << protocol << "," << topic << std::endl;
+void WebSocketTransport::send (string protocol, string topic, Message payload, Message context) {
+  cout << protocol << "," << topic << endl;
 }
 
-void WebSocketTransport::sendAll (std::string protocol, std::string topic, Message payload, Message context) {
+void WebSocketTransport::sendAll (string protocol, string topic, Message payload, Message context) {
 
 }
 
-void WebSocketTransport::receive (std::string protocol, std::string topic, Message payload, Message context) {
+void WebSocketTransport::receive (string protocol, string topic, Json payload, Json context) {
 
 }
 
 void WebSocketTransport::handleMessage (websocketpp::connection_hdl hdl, server::message_ptr msg) {
   // Call receive
-  std::cout << "Received:" << msg->get_payload() << std::endl;
+  cout << "Received:" << msg->get_payload() << std::endl;
+  const auto msgStr = msg->get_payload();
+  string err;
+  Json msgJson = Json::parse(msgStr, err);
+  if (!err.empty()) {
+    cout << "Error:" << err.c_str() << endl;
+    return;
+  }
+  Json context = Json::object {
+    { "connection", "foo"},
+  };
+  WebSocketTransport::receive(msgJson["protocol"].dump(), msgJson["command"].dump(), msgJson["payload"], context);
 }

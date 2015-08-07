@@ -15,11 +15,12 @@ client.on 'connect', (connection) ->
     if message.type is'utf8'
       console.log("Received: '" + message.utf8Data + "'")
 
-  sendNumber = ->
+  send = (protocol, command, payload) ->
     if connection.connected
-      number = Math.round(Math.random() * 0xFFFFFF)
-      connection.sendUTF(number.toString())
-      setTimeout(sendNumber, 1000)
-  sendNumber()
+      connection.send JSON.stringify
+        protocol: protocol
+        command: command
+        payload: payload
+  send 'runtime', 'foo', 'bar'
 
 client.connect('ws://localhost:9002/')
